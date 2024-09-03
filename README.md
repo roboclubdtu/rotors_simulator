@@ -15,7 +15,9 @@ RotorS 2 is the ROS 2 version of the Rotor S MAV gazebo simulator by Autonomous 
 ```
 mkdir ~/rotors_ws
 cd rotors_ws
-git clone https://github.com/arunser/rotors_simulator_2.git src
+git clone -b rotors2 https://github.com/arunser/rotors_simulator.git src
+cd src
+git clone -b ros2 https://github.com/arunser/mav_comm.git
 ```
 
 - Build the packages using colcon.
@@ -28,12 +30,12 @@ source install/setup.bash
 
 - To launch the Swift Pico drone in a basic world in Gazebo Fortress, use the following commands:
 
-    - Set the `GZ_SIM_RESOURCE_PATH` environment variable to include the path to the `ros_gz_swift_pico_description/models/` directory.
+    - Set the `GZ_SIM_RESOURCE_PATH` environment variable to include the path to the `rotors_swift_description/models` directory.
     ```
-    export GZ_SIM_RESOURCE_PATH="path_to/ros_gz_swift_pico_description/models/
+    export GZ_SIM_RESOURCE_PATH="path_to/rotors_swift_description/models
     ```
     - To launch the Gazebo simulation for Swift Pico.
 
     ```
-    ros2 launch ros_gz_swift_pico_bringup swift_pico_simulation.launch.py
+    ros2 launch rotors_swift_gazebo swift_pico_simulation.launch.py
     ```
