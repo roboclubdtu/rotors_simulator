@@ -18,20 +18,20 @@
  * limitations under the License.
  */
 
-#ifndef ROTORS_CONTROL_ROLL_PITCH_YAWRATE_THRUST_CONTROLLER_H
-#define ROTORS_CONTROL_ROLL_PITCH_YAWRATE_THRUST_CONTROLLER_H
+#ifndef ROTORS_CONTROL_ROLL_PITCH_YAWRATE_THRUST_CONTROLLER_HPP
+#define ROTORS_CONTROL_ROLL_PITCH_YAWRATE_THRUST_CONTROLLER_HPP
 
-#include <mav_msgs/conversions.h>
-#include <mav_msgs/eigen_mav_msgs.h>
+#include <mav_msgs/conversions.hpp>
+#include <mav_msgs/eigen_mav_msgs.hpp>
 
-#include "rotors_control/common.h"
-#include "rotors_control/parameters.h"
+#include "rotors_control/common.hpp"
+#include "rotors_control/parameters.hpp"
 
 namespace rotors_control {
 
 // Default values for the roll pitch yawrate thrust controller and the Asctec Firefly.
-static const Eigen::Vector3d kDefaultAttitudeGain = Eigen::Vector3d(3, 3, 0.035);
-static const Eigen::Vector3d kDefaultAngularRateGain = Eigen::Vector3d(0.52, 0.52, 0.025);
+static const Eigen::Vector3d kDefaultAttitudeGain = Eigen::Vector3d(0.7,0.7, 0.035);
+static const Eigen::Vector3d kDefaultAngularRateGain = Eigen::Vector3d(0.1, 0.1, 0.025);
 
 class RollPitchYawrateThrustControllerParameters {
  public:
@@ -78,4 +78,4 @@ class RollPitchYawrateThrustController {
 };
 }
 
-#endif // ROTORS_CONTROL_ROLL_PITCH_YAWRATE_THRUST_CONTROLLER_H
+#endif // ROTORS_CONTROL_ROLL_PITCH_YAWRATE_THRUST_CONTROLLER_HPP

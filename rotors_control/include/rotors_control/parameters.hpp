@@ -1,20 +1,23 @@
-#ifndef INCLUDE_ROTORS_CONTROL_PARAMETERS_H_
-#define INCLUDE_ROTORS_CONTROL_PARAMETERS_H_
+#ifndef INCLUDE_ROTORS_CONTROL_PARAMETERS_HPP_
+#define INCLUDE_ROTORS_CONTROL_PARAMETERS_HPP_
+
+#include <vector>
+#include <eigen3/Eigen/Dense>
 
 namespace rotors_control {
 // Default values for the Asctec Firefly rotor configuration.
-static constexpr double kDefaultRotor0Angle = 0.52359877559;
-static constexpr double kDefaultRotor1Angle = 1.57079632679;
-static constexpr double kDefaultRotor2Angle = 2.61799387799;
-static constexpr double kDefaultRotor3Angle = -2.61799387799;
-static constexpr double kDefaultRotor4Angle = -1.57079632679;
-static constexpr double kDefaultRotor5Angle = -0.52359877559;
+static constexpr double kDefaultRotor0Angle = -0.78539;
+static constexpr double kDefaultRotor1Angle = 2.35619;
+static constexpr double kDefaultRotor2Angle = 0.78539;
+static constexpr double kDefaultRotor3Angle = -2.35619;
+// static constexpr double kDefaultRotor4Angle = -1.57079632679;
+// static constexpr double kDefaultRotor5Angle = -0.52359877559;
 
 // Default vehicle parameters for Asctec Firefly.
-static constexpr double kDefaultMass = 1.56779;
-static constexpr double kDefaultArmLength = 0.215;
+static constexpr double kDefaultMass = 1.52;
+static constexpr double kDefaultArmLength = 0.09;
 static constexpr double kDefaultInertiaXx = 0.0347563;
-static constexpr double kDefaultInertiaYy = 0.0458929;
+static constexpr double kDefaultInertiaYy = 0.07;
 static constexpr double kDefaultInertiaZz = 0.0977;
 static constexpr double kDefaultRotorForceConstant = 8.54858e-6;
 static constexpr double kDefaultRotorMomentConstant = 1.6e-2;
@@ -52,19 +55,19 @@ struct RotorConfiguration {
             kDefaultRotorMomentConstant, 1));
     rotors.push_back(
       Rotor(kDefaultRotor1Angle, kDefaultArmLength, kDefaultRotorForceConstant,
-            kDefaultRotorMomentConstant, -1));
+            kDefaultRotorMomentConstant, 1));
     rotors.push_back(
       Rotor(kDefaultRotor2Angle, kDefaultArmLength, kDefaultRotorForceConstant,
-            kDefaultRotorMomentConstant, 1));
+            kDefaultRotorMomentConstant, -1));
     rotors.push_back(
       Rotor(kDefaultRotor3Angle, kDefaultArmLength, kDefaultRotorForceConstant,
             kDefaultRotorMomentConstant, -1));
-    rotors.push_back(
-      Rotor(kDefaultRotor4Angle, kDefaultArmLength, kDefaultRotorForceConstant,
-            kDefaultRotorMomentConstant, 1));
-    rotors.push_back(
-      Rotor(kDefaultRotor5Angle, kDefaultArmLength, kDefaultRotorForceConstant,
-            kDefaultRotorMomentConstant, -1));
+    // rotors.push_back(
+    //   Rotor(kDefaultRotor4Angle, kDefaultArmLength, kDefaultRotorForceConstant,
+    //         kDefaultRotorMomentConstant, 1));
+    // rotors.push_back(
+    //   Rotor(kDefaultRotor5Angle, kDefaultArmLength, kDefaultRotorForceConstant,
+    //         kDefaultRotorMomentConstant, -1));
   }
   std::vector<Rotor> rotors;
 };
@@ -85,4 +88,4 @@ class VehicleParameters {
 
 }
 
-#endif /* INCLUDE_ROTORS_CONTROL_PARAMETERS_H_ */
+#endif /* INCLUDE_ROTORS_CONTROL_PARAMETERS_HPP_ */

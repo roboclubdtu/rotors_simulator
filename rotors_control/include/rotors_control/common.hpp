@@ -18,16 +18,16 @@
  * limitations under the License.
  */
 
-#ifndef INCLUDE_ROTORS_CONTROL_COMMON_H_
-#define INCLUDE_ROTORS_CONTROL_COMMON_H_
+#ifndef INCLUDE_ROTORS_CONTROL_COMMON_HPP_
+#define INCLUDE_ROTORS_CONTROL_COMMON_HPP_
 
 #include <assert.h>
 
-#include <mav_msgs/conversions.h>
-#include <mav_msgs/default_topics.h>
-#include <nav_msgs/Odometry.h>
+#include <mav_msgs/conversions.hpp>
+#include <mav_msgs/default_topics.hpp>
+#include <nav_msgs/msg/odometry.hpp>
 
-#include "rotors_control/parameters.h"
+#include "rotors_control/parameters.hpp"
 
 namespace rotors_control {
 
@@ -68,7 +68,7 @@ struct EigenOdometry {
   Eigen::Vector3d angular_velocity;
 };
 
-inline void eigenOdometryFromMsg(const nav_msgs::OdometryConstPtr& msg,
+inline void eigenOdometryFromMsg(const nav_msgs::msg::Odometry::ConstSharedPtr& msg,
                                  EigenOdometry* odometry) {
   odometry->position = mav_msgs::vector3FromPointMsg(msg->pose.pose.position);
   odometry->orientation = mav_msgs::quaternionFromMsg(msg->pose.pose.orientation);
@@ -118,4 +118,4 @@ inline void vectorFromSkewMatrix(Eigen::Matrix3d& skew_matrix, Eigen::Vector3d* 
 }
 }
 
-#endif /* INCLUDE_ROTORS_CONTROL_COMMON_H_ */
+#endif /* INCLUDE_ROTORS_CONTROL_COMMON_HPP_ */

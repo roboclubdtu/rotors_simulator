@@ -18,26 +18,28 @@
  * limitations under the License.
  */
 
-#ifndef ROTORS_CONTROL_ROLL_PITCH_YAWRATE_THRUST_CONTROLLER_NODE_H
-#define ROTORS_CONTROL_ROLL_PITCH_YAWRATE_THRUST_CONTROLLER_NODE_H
 
-#include <boost/bind.hpp>
-#include <Eigen/Eigen>
+#ifndef ROTORS_CONTROL_ROLL_PITCH_YAWRATE_THRUST_CONTROLLER_NODE_HPP
+#define ROTORS_CONTROL_ROLL_PITCH_YAWRATE_THRUST_CONTROLLER_NODE_HPP
+
+#include <eigen3/Eigen/Eigen>
 #include <stdio.h>
 
-#include <geometry_msgs/PoseStamped.h>
-#include <mav_msgs/RollPitchYawrateThrust.h>
-#include <mav_msgs/Actuators.h>
-#include <nav_msgs/Odometry.h>
-#include <ros/ros.h>
-#include <ros/callback_queue.h>
+#include <geometry_msgs/msg/pose_stamped.hpp>
+#include <mav_msgs/msg/roll_pitch_yawrate_thrust.hpp>
+#include <mav_msgs/msg/actuators.hpp>
+#include <nav_msgs/msg/odometry.hpp>
+#include <rclcpp/rclcpp.hpp>
+#include <actuator_msgs/msg/actuators.hpp>
+//#include <ros/callback_queue.h>
 
-#include "rotors_control/common.h"
-#include "rotors_control/roll_pitch_yawrate_thrust_controller.h"
+#include "rotors_control/common.hpp"
+#include "rotors_control/roll_pitch_yawrate_thrust_controller.hpp"
 
 namespace rotors_control {
 
-class RollPitchYawrateThrustControllerNode {
+class RollPitchYawrateThrustControllerNode : public rclcpp::Node 
+{
  public:
   RollPitchYawrateThrustControllerNode();
   ~RollPitchYawrateThrustControllerNode();
@@ -48,20 +50,21 @@ class RollPitchYawrateThrustControllerNode {
  private:
 
   RollPitchYawrateThrustController roll_pitch_yawrate_thrust_controller_;
+  rclcpp::Node::SharedPtr node_handle;
 
   std::string namespace_;
 
   // subscribers
-  ros::Subscriber cmd_roll_pitch_yawrate_thrust_sub_;
-  ros::Subscriber odometry_sub_;
+  rclcpp::Subscription<mav_msgs::msg::RollPitchYawrateThrust>::ConstSharedPtr cmd_roll_pitch_yawrate_thrust_sub_;
+  rclcpp::Subscription<nav_msgs::msg::Odometry>::ConstSharedPtr odometry_sub_;
+  
+  //publishers
+  rclcpp::Publisher<actuator_msgs::msg::Actuators>::SharedPtr motor_velocity_reference_pub_;
 
-  ros::Publisher motor_velocity_reference_pub_;
+  void RollPitchYawrateThrustCallback(const mav_msgs::msg::RollPitchYawrateThrust::ConstSharedPtr& roll_pitch_yawrate_thrust_reference_msg);
 
-  void RollPitchYawrateThrustCallback(
-      const mav_msgs::RollPitchYawrateThrustConstPtr& roll_pitch_yawrate_thrust_reference_msg);
-
-  void OdometryCallback(const nav_msgs::OdometryConstPtr& odometry_msg);
+  void OdometryCallback(const nav_msgs::msg::Odometry::ConstSharedPtr& odometry_msg);
 };
 }
 
-#endif // ROTORS_CONTROL_ROLL_PITCH_YAWRATE_THRUST_CONTROLLER_NODE_H
+#endif // ROTORS_CONTROL_ROLL_PITCH_YAWRATE_THRUST_CONTROLLER_NODE_HPP
