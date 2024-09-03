@@ -1,36 +1,28 @@
-<package>
-  <name>rotors_joy_interface</name>
-  <version>2.2.3</version>
-  <description>The rotors_joy_interface package to control MAVs with a joystick</description>
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>rotors_swift_interface</name>
+  <version>0.0.0</version>
+  <description>TODO: Package description</description>
+  <maintainer email="stormbreaker.004@gmail.com">arunser</maintainer>
+  <license>TODO: License declaration</license>
 
-  <maintainer email="fadri.furrer@mavt.ethz.ch">Fadri Furrer</maintainer>
-  <maintainer email="mina.kamel@mavt.ethz.ch">Mina Kamel</maintainer>
+  <buildtool_depend>ament_cmake</buildtool_depend>
 
-  <author>Fadri Furrer</author>
-  <author>Michael Burri</author>
-  <author>Mina Kamel</author>
-  <author>Janosch Nikolic</author>
-  <author>Markus Achtelik</author>
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>ament_lint_common</test_depend>
 
-  <license>ASL 2.0</license>
-
-  <url type="website">https://github.com/ethz-asl/rotors_simulator</url>
-  <url type="bugtracker">https://github.com/ethz-asl/rotors_simulator/issues</url>
-
-  <buildtool_depend>catkin</buildtool_depend>
-
-  <!-- Dependencies needed to compile this package. -->
-  <build_depend>sensor_msgs</build_depend>
   <build_depend>geometry_msgs</build_depend>
   <build_depend>mav_msgs</build_depend>
-  <build_depend>roscpp</build_depend>
-  <build_depend>trajectory_msgs</build_depend>
+  <build_depend>rclcpp</build_depend>
+  <build_depend>swift_msgs</build_depend>
 
-  <!-- Dependencies needed after this package is compiled. -->
-  <run_depend>sensor_msgs</run_depend>
-  <run_depend>geometry_msgs</run_depend>
-  <run_depend>mav_msgs</run_depend>
-  <run_depend>roscpp</run_depend>
-  <run_depend>trajectory_msgs</run_depend>
+  <exec_depend>geometry_msgs</exec_depend>
+  <exec_depend>mav_msgs</exec_depend>
+  <exec_depend>rclcpp</exec_depend>
+  <exec_depend>swift_msgs</exec_depend>
 
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
 </package>

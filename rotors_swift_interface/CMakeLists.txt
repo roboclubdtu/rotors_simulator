@@ -1,30 +1,42 @@
-cmake_minimum_required(VERSION 2.8.3)
-project(rotors_joy_interface)
+cmake_minimum_required(VERSION 3.8)
+project(rotors_swift_interface)
 
-find_package(catkin REQUIRED COMPONENTS
-  roscpp
-  geometry_msgs
-  mav_msgs
-  sensor_msgs
-  trajectory_msgs
+if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+  add_compile_options(-Wall -Wextra -Wpedantic)
+endif()
+
+# find dependencies
+find_package(ament_cmake REQUIRED)
+find_package(rclcpp REQUIRED)
+find_package(geometry_msgs REQUIRED)
+find_package(mav_msgs REQUIRED)
+find_package(swift_msgs REQUIRED)
+
+
+#${mav_msgs_INCLUDE_DIRS} is the path for the header files in mav_msgs
+include_directories(include ${mav_msgs_INCLUDE_DIRS})
+
+add_executable(rotors_swift_interface src/swift_trans.cpp)
+ament_target_dependencies(rotors_swift_interface rclcpp geometry_msgs mav_msgs swift_msgs)
+
+
+install(TARGETS
+  rotors_swift_interface
+  DESTINATION lib/${PROJECT_NAME}
 )
-include_directories(include ${catkin_INCLUDE_DIRS})
 
-catkin_package(
-  DEPENDS
-  INCLUDE_DIRS include
-  CATKIN_DEPENDS roscpp geometry_msgs mav_msgs sensor_msgs trajectory_msgs
-  LIBRARIES
-)
 
-add_definitions(-std=c++11)
+if(BUILD_TESTING)
+  find_package(ament_lint_auto REQUIRED)
+  # the following line skips the linter which checks for copyrights
+  # comment the line when a copyright and license is added to all source files
+  set(ament_cmake_copyright_FOUND TRUE)
+  # the following line skips cpplint (only works in a git repo)
+  # comment the line when this package is in a git repo and when
+  # a copyright and license is added to all source files
+  set(ament_cmake_cpplint_FOUND TRUE)
+  ament_lint_auto_find_test_dependencies()
+endif()
 
-add_executable(rotors_joy_interface src/joy.cpp)
-add_dependencies(rotors_joy_interface ${catkin_EXPORTED_TARGETS})
-target_link_libraries(rotors_joy_interface ${catkin_LIBRARIES})
 
-install(TARGETS rotors_joy_interface
-  ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-  LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-)
+ament_package()
