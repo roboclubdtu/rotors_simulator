@@ -45,6 +45,16 @@ void SwiftTrans::TransCallback(const swift_msgs::msg::SwiftMsgs::ConstSharedPtr 
 
     control_msg.roll = ((msg->rc_roll-1500) * max.roll/div_factor)*axes.roll_direction;
     control_msg.pitch = ((msg->rc_pitch-1500) * max.pitch/div_factor)*axes.pitch_direction;
+    
+    if (msg->rc_yaw < 1500) {
+        current_yaw_vel = max.rate_yaw;
+    }
+    else if (msg->rc_yaw > 1500) {
+        current_yaw_vel = -max.rate_yaw;
+    }
+    else {
+        current_yaw_vel = 0;
+    }
     control_msg.yaw_rate = current_yaw_vel;
 
     //option1
